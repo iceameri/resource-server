@@ -11,7 +11,7 @@ public enum BoardType {
 
     private final String description;
 
-    BoardType(String description) {
+    BoardType(final String description) {
         this.description = description;
     }
 }

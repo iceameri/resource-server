@@ -29,7 +29,7 @@ public class SecuredUserController extends BaseSecuredController {
     }
 
     @GetMapping("/userinfo")
-    public ResponseEntity<String> userInfo(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public ResponseEntity<String> userInfo(@AuthenticationPrincipal final UserPrincipal userPrincipal) {
         if (userPrincipal.isAuthenticated()) {
             AuthenticatedUser user = (AuthenticatedUser) userPrincipal;
 
@@ -39,7 +39,7 @@ public class SecuredUserController extends BaseSecuredController {
     }
 
     @GetMapping("/userinfo2")
-    public Map<String, Object> userInfo2(@AuthenticationPrincipal Jwt jwt) {
+    public Map<String, Object> userInfo2(@AuthenticationPrincipal final Jwt jwt) {
         Map<String, Object> response = new HashMap<>();
         response.put("email", jwt.getClaimAsString("email"));
         response.put("sub", jwt.getSubject());

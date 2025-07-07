@@ -12,43 +12,43 @@ import java.util.List;
 @Table(name = DatabaseConstants.Tables.COMMENTS)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment extends BaseTimeEntity {
+public class Comments extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = DatabaseConstants.Columns.ID, nullable = false, columnDefinition =  DatabaseConstants.ColumnDefinitions.BIGINT)
     private Long id;
 
-    // 게시판과의 관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = DatabaseConstants.Columns.BOARD_ID, nullable = false)
     @Setter
-    private Board board;
+    private Boards boards;
 
     @Column(name = DatabaseConstants.Columns.CONTENT, nullable = false, length = 1000)
     private String content;
 
-    // 대댓글 관계 (Self-referencing)
+    // 대댓글 관계
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
+    @JoinColumn(name = DatabaseConstants.Columns.PARENT_ID)
     @Setter
-    private Comment parent;
+    private Comments parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("created ASC")
-    private List<Comment> replies = new ArrayList<>();
+    private List<Comments> replies = new ArrayList<>();
 
     @Column(name = DatabaseConstants.Columns.IS_SECRET, nullable = false)
     private Boolean isSecret = false;
 
     @Builder
-    private Comment(final Board board,
-                    final String content,
-                    final Comment parent,
-                    final Boolean isSecret) {
-        validateContent(content);
-        validateParentDepth(parent);
+    private Comments(final Boards boards,
+                     final String content,
+                     final Comments parent,
+                     final Boolean isSecret) {
+        this.validateContent(content);
+        this.validateParentDepth(parent);
 
-        this.board = board;
+        this.boards = boards;
         this.content = content;
         this.parent = parent;
         this.isSecret = isSecret != null ? isSecret : false;
@@ -63,9 +63,9 @@ public class Comment extends BaseTimeEntity {
         return parent == null;
     }
 
-    public void addReply(Comment reply) {
+    public void addReply(final Comments reply) {
         reply.setParent(this);
-        reply.setBoard(this.board);
+        reply.setBoards(this.boards);
         this.replies.add(reply);
     }
 
@@ -79,11 +79,11 @@ public class Comment extends BaseTimeEntity {
     }
 
     // 최상위 댓글 조회
-    public Comment getRootComment() {
+    public Comments getRootComment() {
         return parent == null ? this : parent;
     }
 
-    private void validateContent(String content) {
+    private void validateContent(final String content) {
         if (content == null || content.trim().isEmpty()) {
             throw new IllegalArgumentException("댓글 내용은 필수입니다.");
         }
@@ -92,7 +92,7 @@ public class Comment extends BaseTimeEntity {
         }
     }
 
-    private void validateParentDepth(Comment parent) {
+    private void validateParentDepth(final Comments parent) {
         if (parent != null && parent.isReply()) {
             throw new IllegalArgumentException("대댓글에는 답글을 달 수 없습니다.");
         }

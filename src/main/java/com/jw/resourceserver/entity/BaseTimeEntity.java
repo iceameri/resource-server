@@ -34,9 +34,13 @@ public abstract class BaseTimeEntity {
     @Column(name = DatabaseConstants.Columns.IS_DELETED, nullable = false)
     private Boolean isDeleted = false;
 
+    @Column(name = DatabaseConstants.Columns.DELETED)
+    private LocalDateTime deleted;
+
     // Soft Delete 메서드
     public void softDelete() {
         this.isDeleted = true;
+        this.deleted = LocalDateTime.now();
     }
 
     public void restore() {

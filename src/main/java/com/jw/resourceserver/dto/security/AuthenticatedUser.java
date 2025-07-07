@@ -11,7 +11,7 @@ public class AuthenticatedUser extends UserPrincipal {
     private final String username;
     private final UserType userType;
 
-    public AuthenticatedUser(String socialUserId, String email, String username, UserType userType) {
+    public AuthenticatedUser(final String socialUserId, final String email, final String username, final UserType userType) {
         this.socialUserId = socialUserId;
         this.email = email;
         this.username = username;
