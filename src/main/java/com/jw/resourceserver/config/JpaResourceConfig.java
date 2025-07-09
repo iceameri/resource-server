@@ -22,7 +22,8 @@ public class JpaResourceConfig {
     @Bean(name = "resourceEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean resourceEntityManagerFactory(
             @Qualifier("resourceDataSource") DataSource dataSource,
-            EntityManagerFactoryBuilder builder) {
+            EntityManagerFactoryBuilder builder
+    ) {
         return builder
                 .dataSource(dataSource)
                 .packages("com.jw.resourceserver.entity.resource")   // JPA Entity 위치
@@ -32,7 +33,8 @@ public class JpaResourceConfig {
 
     @Bean(name = "resourceTransactionManager")
     public PlatformTransactionManager resourceTransactionManager(
-            @Qualifier("resourceEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+            @Qualifier("resourceEntityManagerFactory") EntityManagerFactory entityManagerFactory
+    ) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

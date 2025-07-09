@@ -38,7 +38,7 @@ public final class DatabaseConstants {
         public static final String BIGINT = "BIGINT";
         public static final String NVARCHAR_50 = "NVARCHAR(50)";
         public static final String NVARCHAR_200 = "NVARCHAR(200)";
-        public static final String NVARCHAR_5000 = "NVARCHAR(5000)";
+        public static final String NVARCHAR_4000 = "NVARCHAR(4000)";
     }
 
 
@@ -52,7 +52,7 @@ public final class DatabaseConstants {
         public static final String BOARDS_SEARCH_COLUMNS =
                 Columns.TITLE + " ASC , " +
                 Columns.CONTENT + " ASC , " +
-                Columns.AUTHOR + "AS , " +
+                Columns.AUTHOR + " ASC , " +
                 Columns.CREATED_BY + " ASC ";
     }
 }

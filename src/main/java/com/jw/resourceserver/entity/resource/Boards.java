@@ -28,17 +28,17 @@ public class Boards extends BaseTimeEntity {
     @Column(name = DatabaseConstants.Columns.BOARD_TYPE, nullable = false, length = 20)
     private BoardType boardType;
 
-    @Column(name = DatabaseConstants.Columns.TITLE, nullable = false, length = 200, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_200)
+    @Column(name = DatabaseConstants.Columns.TITLE, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_200)
     private String title;
 
     @Lob
-    @Column(name = DatabaseConstants.Columns.CONTENT, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_5000)
+    @Column(name = DatabaseConstants.Columns.CONTENT, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_4000)
     private String content;
 
-    @Column(name = DatabaseConstants.Columns.AUTHOR, nullable = false, length = 50, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_50)
+    @Column(name = DatabaseConstants.Columns.AUTHOR, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_50)
     private String author;
 
-    @Column(name = DatabaseConstants.Columns.VIEW_COUNT, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.BIGINT)
+    @Column(name = DatabaseConstants.Columns.VIEW_COUNT, nullable = false)
     private Long viewCount = 0L;
 
     @Column(name = DatabaseConstants.Columns.IS_PINNED, nullable = false)

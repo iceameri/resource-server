@@ -10,25 +10,28 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comments, Long> {
     List<Comments> findByBoardsIdAndParentIsNullOrderByCreatedAsc(final Long boardId);
+
     List<Comments> findByParentIdOrderByCreatedAsc(final Long parentId);
 
     List<Comments> findByBoardsId(Long boardsId);
 
+    /*DB 친화적*/
     @Modifying
-    @Query("""
-            UPDATE  Comments AS A
-            SET     A.isDeleted = true,
-                    A.deleted = GETDATE()
-            WHERE   A.boards.id = :boardId
-            """)
+    @Query(value = """
+            UPDATE comments
+            SET    is_deleted = 1,
+                   deleted = GETDATE()
+            WHERE  board_id = :boardId
+            """, nativeQuery = true)
     void softDeleteByBoardId(@Param("boardId") Long boardId);
 
+    /*JPA 친화적*/
     @Modifying
     @Query("""
             UPDATE  Comments AS A
             SET     A.isDeleted = true,
-                    A.deleted = GETDATE()
-            WHERE   A.id = IN (:ids)
+                    A.deleted = CURRENT_TIMESTAMP
+            WHERE   A.id IN (:ids)
             """)
     int softDeleteByIds(@Param("ids") List<Long> ids);
 
