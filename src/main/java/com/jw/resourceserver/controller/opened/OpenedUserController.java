@@ -41,7 +41,8 @@ public class OpenedUserController extends BaseOpenedController {
     public void login(
             @RequestHeader final HttpHeaders reqHeaders,
             final HttpServletResponse response,
-            @RequestParam(name = "redirect_uri", required = false) final String redirectUri) throws IOException {
+            @RequestParam(name = "redirect_uri", required = false) final String redirectUri
+    ) throws IOException {
         // 리디렉션 URL 구성
         String clientId = "test-client";
         String url = redirectUri != null ? redirectUri : "http://localhost:9091/authorized";
