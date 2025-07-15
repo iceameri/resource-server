@@ -1,12 +1,14 @@
 package com.jw.resourceserver.dto.request;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class CommentCreateRequest {
-    private final String content;
-    private final Long parentId;
-    private final Boolean isSecret;
+    private String content;
+    private Long parentId;
+    private Boolean isSecret;
 
     public CommentCreateRequest(final String content) {
         this(content, null, false);
@@ -33,4 +35,3 @@ public class CommentCreateRequest {
         return parentId != null;
     }
 }
-

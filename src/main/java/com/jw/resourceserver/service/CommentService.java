@@ -27,7 +27,11 @@ public class CommentService {
     @Transactional
     public CommentResponse createComment(final Long boardId, final CommentCreateRequest request) {
         Boards board = this.findBoardById(boardId);
-        Comments parent = this.findParentCommentIfExists(request);
+        Comments parent = null;
+
+        if (request.getParentId() != null && request.getParentId() > 0) {
+            parent = this.findParentCommentIfExists(request);
+        }
 
         Comments comment = this.createCommentEntity(board, request, parent);
 

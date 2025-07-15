@@ -81,7 +81,7 @@ public class BoardService {
     }
 
     public Boards findBoardById(final Long id) {
-        return this.boardRepository.findById(id)
+        return this.boardRepository.findBoardWithComments(id)
                 .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다: " + id));
     }
 

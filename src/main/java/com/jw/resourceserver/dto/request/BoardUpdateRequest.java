@@ -32,4 +32,3 @@ public record BoardUpdateRequest(String title, String content, Boolean isPinned,
         return attachmentName != null;
     }
 }
-

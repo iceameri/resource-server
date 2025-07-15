@@ -35,7 +35,7 @@ public record CommentResponse(
                 comment.getContent(),
                 comment.getIsSecret(),
                 comment.getParent() != null ? comment.getParent().getId() : null,
-                comment.getDepth(),
+                comment.getParent() != null ? 1 : 0,
                 comment.getReplyCount(),
                 comment.getCreated(),
                 comment.getCreatedBy(),
@@ -63,4 +63,3 @@ public record CommentResponse(
         return new ArrayList<>(replies);
     }
 }
-

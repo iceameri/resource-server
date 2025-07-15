@@ -5,6 +5,7 @@ import com.jw.resourceserver.entity.resource.Boards;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record BoardResponse(
         Long id,
@@ -23,7 +24,8 @@ public record BoardResponse(
         String createdBy,
         LocalDateTime updated,
         String updatedBy,
-        Boolean isDeleted
+        Boolean isDeleted,
+        List<CommentResponse> commentResponses
 ) {
     @Builder
     public BoardResponse {
@@ -62,6 +64,7 @@ public record BoardResponse(
                 .updatedBy(board.getUpdatedBy())
                 .updated(board.getUpdated())
                 .isDeleted(board.getIsDeleted())
+                .commentResponses(board.getComments() != null ? board.getComments().stream().map(CommentResponse::from).toList(): null)
                 .build();
     }
 

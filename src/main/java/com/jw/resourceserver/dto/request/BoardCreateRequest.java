@@ -3,17 +3,19 @@ package com.jw.resourceserver.dto.request;
 import com.jw.resourceserver.entity.resource.BoardType;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class BoardCreateRequest {
-    private final BoardType boardType;
-    private final String title;
-    private final String content;
-    private final String author;
-    private final Boolean isPinned;
-    private final Boolean isSecret;
-    private final String attachmentUrl;
-    private final String attachmentName;
+    private BoardType boardType;
+    private String title;
+    private String content;
+    private String author;
+    private Boolean isPinned;
+    private Boolean isSecret;
+    private String attachmentUrl;
+    private String attachmentName;
 
     public BoardCreateRequest(final BoardType boardType, final String title, final String content, final String author) {
         this(boardType, title, content, author, false, false, null, null);

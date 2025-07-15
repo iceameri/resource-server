@@ -31,7 +31,6 @@ public class Boards extends BaseTimeEntity {
     @Column(name = DatabaseConstants.Columns.TITLE, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_200)
     private String title;
 
-    @Lob
     @Column(name = DatabaseConstants.Columns.CONTENT, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_4000)
     private String content;
 
@@ -72,7 +71,7 @@ public class Boards extends BaseTimeEntity {
         this.title = title;
         this.content = content;
         this.author = author;
-        this.viewCount = viewCount;
+        this.viewCount = viewCount == null ? 0 : viewCount;
         this.isPinned = isPinned;
         this.isSecret = isSecret;
         this.attachmentUrl = attachmentUrl;
