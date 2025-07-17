@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 public abstract class BaseSecuredController extends BaseController {
 
-    public static final String SECURED_API_PREFIX = BaseController.API_PREFIX + "/opened";
+    public static final String SECURED_API_PREFIX = BaseController.API_PREFIX + "/secure";
 
     protected JwtAuthenticationToken getJwtAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/boards")
-public class SecuredBoardController {
+@RequestMapping(SecuredBoardController.SECURED_API_PREFIX)
+public class SecuredBoardController extends BaseSecuredController {
+
+    public static final String SECURED_API_PREFIX = BaseSecuredController.API_PREFIX + "/boards";
+
     private final BoardService boardService;
 
     SecuredBoardController(final BoardService boardService) {

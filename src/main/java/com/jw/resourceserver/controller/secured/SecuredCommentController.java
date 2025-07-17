@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/boards/{boardId}/comments")
-public class SecuredCommentController {
+@RequestMapping(SecuredCommentController.SECURED_API_PREFIX)
+public class SecuredCommentController extends BaseSecuredController {
+    public static final String SECURED_API_PREFIX = BaseSecuredController.API_PREFIX + "/boards/{boardId}/comments";
+
     private final CommentService commentService;
 
     SecuredCommentController(final CommentService commentService) {

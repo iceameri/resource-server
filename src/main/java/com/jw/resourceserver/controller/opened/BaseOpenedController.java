@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public abstract class BaseOpenedController extends BaseController {
 
-    public static final String OPENED_API_PREFIX = BaseController.API_PREFIX + "/opened";
+    public static final String OPENED_API_PREFIX = BaseController.API_PREFIX + "/open";
 }
