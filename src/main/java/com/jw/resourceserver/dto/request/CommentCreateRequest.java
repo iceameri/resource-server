@@ -1,28 +1,17 @@
 package com.jw.resourceserver.dto.request;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+public record CommentCreateRequest(
+        String content,
+        Long parentId,
+        Boolean isSecret
+) {
+    public CommentCreateRequest {
+        validateContent(content);
 
-@Getter
-@NoArgsConstructor
-public class CommentCreateRequest {
-    private String content;
-    private Long parentId;
-    private Boolean isSecret;
-
-    public CommentCreateRequest(final String content) {
-        this(content, null, false);
+        isSecret = isSecret != null ? isSecret : false;
     }
 
-    public CommentCreateRequest(final String content, final Long parentId, final Boolean isSecret) {
-        this.validateContent(content);
-
-        this.content = content;
-        this.parentId = parentId;
-        this.isSecret = isSecret != null ? isSecret : false;
-    }
-
-    private void validateContent(final String content) {
+    private static void validateContent(String content) {
         if (content == null || content.trim().isEmpty()) {
             throw new IllegalArgumentException("댓글 내용은 필수입니다.");
         }

@@ -1,50 +1,28 @@
 package com.jw.resourceserver.dto.request;
 
 import com.jw.resourceserver.entity.resource.BoardType;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@Getter
-@NoArgsConstructor
-public class BoardCreateRequest {
-    private BoardType boardType;
-    private String title;
-    private String content;
-    private String author;
-    private Boolean isPinned;
-    private Boolean isSecret;
-    private String attachmentUrl;
-    private String attachmentName;
 
-    public BoardCreateRequest(final BoardType boardType, final String title, final String content, final String author) {
-        this(boardType, title, content, author, false, false, null, null);
+public record BoardCreateRequest(
+        BoardType boardType,
+        String title,
+        String content,
+        String author,
+        Boolean isPinned,
+        Boolean isSecret,
+        String attachmentUrl,
+        String attachmentName
+) {
+    public BoardCreateRequest {
+        validateTitle(title);
+        validateContent(content);
+        validateAuthor(author);
+
+        isPinned = isPinned != null ? isPinned : false;
+        isSecret = isSecret != null ? isSecret : false;
     }
 
-    @Builder
-    public BoardCreateRequest(final BoardType boardType,
-                              final String title,
-                              final String content,
-                              final String author,
-                              final Boolean isPinned,
-                              final Boolean isSecret,
-                              final String attachmentUrl,
-                              final String attachmentName) {
-        this.validateTitle(title);
-        this.validateContent(content);
-        this.validateAuthor(author);
-
-        this.boardType = boardType;
-        this.title = title;
-        this.content = content;
-        this.author = author;
-        this.isPinned = isPinned != null ? isPinned : false;
-        this.isSecret = isSecret != null ? isSecret : false;
-        this.attachmentUrl = attachmentUrl;
-        this.attachmentName = attachmentName;
-    }
-
-    private void validateTitle(final String title) {
+    private static void validateTitle(String title) {
         if (title == null || title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목은 필수입니다.");
         }
@@ -53,13 +31,13 @@ public class BoardCreateRequest {
         }
     }
 
-    private void validateContent(final String content) {
+    private static void validateContent(String content) {
         if (content == null || content.trim().isEmpty()) {
             throw new IllegalArgumentException("내용은 필수입니다.");
         }
     }
 
-    private void validateAuthor(final String author) {
+    private static void validateAuthor(String author) {
         if (author == null || author.trim().isEmpty()) {
             throw new IllegalArgumentException("작성자는 필수입니다.");
         }

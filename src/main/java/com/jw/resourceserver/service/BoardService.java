@@ -87,14 +87,14 @@ public class BoardService {
 
     private Boards createBoardEntity(final BoardCreateRequest request) {
         return Boards.builder()
-                .boardType(request.getBoardType())
-                .title(request.getTitle())
-                .content(request.getContent())
-                .author(request.getAuthor())
-                .isPinned(request.getIsPinned())
-                .isSecret(request.getIsSecret())
-                .attachmentUrl(request.getAttachmentUrl())
-                .attachmentName(request.getAttachmentName())
+                .boardType(request.boardType())
+                .title(request.title())
+                .content(request.content())
+                .author(request.author())
+                .isPinned(request.isPinned())
+                .isSecret(request.isSecret())
+                .attachmentUrl(request.attachmentUrl())
+                .attachmentName(request.attachmentName())
                 .build();
     }
 

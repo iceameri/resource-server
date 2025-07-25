@@ -29,7 +29,7 @@ public class CommentService {
         Boards board = this.findBoardById(boardId);
         Comments parent = null;
 
-        if (request.getParentId() != null && request.getParentId() > 0) {
+        if (request.parentId() != null && request.parentId() > 0) {
             parent = this.findParentCommentIfExists(request);
         }
 
@@ -106,7 +106,7 @@ public class CommentService {
 
     private Comments findParentCommentIfExists(final CommentCreateRequest request) {
         if (request.isReply()) {
-            return this.findCommentById(request.getParentId());
+            return this.findCommentById(request.parentId());
         }
         return null;
     }
@@ -116,9 +116,9 @@ public class CommentService {
                                          final Comments parent) {
         return Comments.builder()
                 .boards(board)
-                .content(request.getContent())
+                .content(request.content())
                 .parent(parent)
-                .isSecret(request.getIsSecret())
+                .isSecret(request.isSecret())
                 .build();
     }
 }
