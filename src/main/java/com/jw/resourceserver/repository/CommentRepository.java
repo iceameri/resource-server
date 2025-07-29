@@ -9,9 +9,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comments, Long> {
-    List<Comments> findByBoardsIdAndParentIsNullOrderByCreatedAsc(final Long boardId);
 
-    List<Comments> findByParentIdOrderByCreatedAsc(final Long parentId);
+    List<Comments> findByBoardsIdAndParentIsNullOrderByCreatedAsc(final Long boardId);
 
     List<Comments> findByBoardsId(Long boardsId);
 

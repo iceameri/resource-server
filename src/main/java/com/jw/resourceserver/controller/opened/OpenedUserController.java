@@ -79,7 +79,7 @@ public class OpenedUserController extends BaseOpenedController {
         body.add("client_secret", "P@$$w0rd1!");
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
-        ResponseEntity<OAuth2TokenResponse> response = restTemplate.postForEntity(tokenUrl, request, OAuth2TokenResponse.class);
+        ResponseEntity<OAuth2TokenResponse> response = this.restTemplate.postForEntity(tokenUrl, request, OAuth2TokenResponse.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             String accessToken = Objects.requireNonNull(response.getBody()).access_token();

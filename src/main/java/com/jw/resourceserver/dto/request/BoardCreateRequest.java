@@ -14,15 +14,15 @@ public record BoardCreateRequest(
         String attachmentName
 ) {
     public BoardCreateRequest {
-        validateTitle(title);
-        validateContent(content);
-        validateAuthor(author);
+        this.validateTitle(title);
+        this.validateContent(content);
+        this.validateAuthor(author);
 
         isPinned = isPinned != null ? isPinned : false;
         isSecret = isSecret != null ? isSecret : false;
     }
 
-    private static void validateTitle(String title) {
+    private void validateTitle(String title) {
         if (title == null || title.trim().isEmpty()) {
             throw new IllegalArgumentException("제목은 필수입니다.");
         }
@@ -31,13 +31,13 @@ public record BoardCreateRequest(
         }
     }
 
-    private static void validateContent(String content) {
+    private void validateContent(String content) {
         if (content == null || content.trim().isEmpty()) {
             throw new IllegalArgumentException("내용은 필수입니다.");
         }
     }
 
-    private static void validateAuthor(String author) {
+    private void validateAuthor(String author) {
         if (author == null || author.trim().isEmpty()) {
             throw new IllegalArgumentException("작성자는 필수입니다.");
         }

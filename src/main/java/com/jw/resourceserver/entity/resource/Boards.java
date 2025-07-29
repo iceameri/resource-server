@@ -1,7 +1,7 @@
 package com.jw.resourceserver.entity.resource;
 
 import com.jw.resourceserver.entity.BaseTimeEntity;
-import com.jw.resourceserver.entity.DatabaseConstants;
+import com.jw.resourceserver.entity.DBConstants;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = DatabaseConstants.Tables.BOARDS, indexes = {
-        @Index(name = DatabaseConstants.IndexNames.BOARDS_BOARD_TYPE, columnList = DatabaseConstants.Columns.BOARD_TYPE),
-        @Index(name = DatabaseConstants.IndexNames.BOARDS_SEARCH, columnList = DatabaseConstants.IndexColumns.BOARDS_SEARCH_COLUMNS),
+@Table(name = DBConstants.Tables.BOARDS, indexes = {
+        @Index(name = DBConstants.IndexNames.BOARDS_BOARD_TYPE, columnList = DBConstants.Columns.BOARD_TYPE),
+        @Index(name = DBConstants.IndexNames.BOARDS_SEARCH, columnList = DBConstants.IndexColumns.BOARDS_SEARCH_COLUMNS),
 })
 @Getter
 @NoArgsConstructor
@@ -21,38 +21,38 @@ public class Boards extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = DatabaseConstants.Columns.ID, nullable = false)
+    @Column(name = DBConstants.Columns.ID, nullable = false)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = DatabaseConstants.Columns.BOARD_TYPE, nullable = false, length = 20)
+    @Column(name = DBConstants.Columns.BOARD_TYPE, nullable = false, length = 20)
     private BoardType boardType;
 
-    @Column(name = DatabaseConstants.Columns.TITLE, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_200)
+    @Column(name = DBConstants.Columns.TITLE, nullable = false, columnDefinition = DBConstants.ColumnDefinitions.NVARCHAR_200)
     private String title;
 
-    @Column(name = DatabaseConstants.Columns.CONTENT, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_4000)
+    @Column(name = DBConstants.Columns.CONTENT, nullable = false, columnDefinition = DBConstants.ColumnDefinitions.NVARCHAR_4000)
     private String content;
 
-    @Column(name = DatabaseConstants.Columns.AUTHOR, nullable = false, columnDefinition = DatabaseConstants.ColumnDefinitions.NVARCHAR_50)
+    @Column(name = DBConstants.Columns.AUTHOR, nullable = false, columnDefinition = DBConstants.ColumnDefinitions.NVARCHAR_50)
     private String author;
 
-    @Column(name = DatabaseConstants.Columns.VIEW_COUNT, nullable = false)
+    @Column(name = DBConstants.Columns.VIEW_COUNT, nullable = false)
     private Long viewCount = 0L;
 
-    @Column(name = DatabaseConstants.Columns.IS_PINNED, nullable = false)
+    @Column(name = DBConstants.Columns.IS_PINNED, nullable = false)
     private Boolean isPinned = false;
 
-    @Column(name = DatabaseConstants.Columns.IS_SECRET, nullable = false)
+    @Column(name = DBConstants.Columns.IS_SECRET, nullable = false)
     private Boolean isSecret = false;
 
-    @OneToMany(mappedBy = DatabaseConstants.Tables.BOARDS, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = DBConstants.Tables.BOARDS, cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Comments> comments = new ArrayList<>();
 
-    @Column(name = DatabaseConstants.Columns.ATTACHMENT_URL, length = 500)
+    @Column(name = DBConstants.Columns.ATTACHMENT_URL, length = 500)
     private String attachmentUrl;
 
-    @Column(name = DatabaseConstants.Columns.ATTACHMENT_NAME, length = 200)
+    @Column(name = DBConstants.Columns.ATTACHMENT_NAME, columnDefinition = DBConstants.ColumnDefinitions.NVARCHAR_200)
     private String attachmentName;
 
     @Builder

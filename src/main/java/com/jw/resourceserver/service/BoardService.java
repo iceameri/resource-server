@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -46,7 +47,10 @@ public class BoardService {
     public BoardResponse updateBoard(final Long id, final BoardUpdateRequest request) {
         Boards board = this.findBoardById(id);
         this.updateBoardFields(board, request);
-        return BoardResponse.from(this.boardRepository.save(board));
+
+        return Optional.of(this.boardRepository.save(board))
+                .map(BoardResponse::from)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional

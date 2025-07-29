@@ -1,7 +1,7 @@
 package com.jw.resourceserver.entity;
 
-public final class DatabaseConstants {
-    DatabaseConstants() {
+public final class DBConstants {
+    DBConstants() {
     }
 
     public static final class Tables {
@@ -38,6 +38,7 @@ public final class DatabaseConstants {
         public static final String BIGINT = "BIGINT";
         public static final String NVARCHAR_50 = "NVARCHAR(50)";
         public static final String NVARCHAR_200 = "NVARCHAR(200)";
+        public static final String NVARCHAR_2000 = "NVARCHAR(2000)";
         public static final String NVARCHAR_4000 = "NVARCHAR(4000)";
     }
 

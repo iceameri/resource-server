@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Boards, Long> {
+
     List<Boards> findByBoardTypeOrderByIsPinnedDescCreatedDesc(final BoardType boardType);
+
     List<Boards> findAllByOrderByIsPinnedDescCreatedDesc();
-    List<Boards> findByTitleContainingIgnoreCaseOrderByCreatedDesc(final String keyword);
-    List<Boards> findByAuthorOrderByCreatedDesc(final String author);
 
     @Query("""
             SELECT          A

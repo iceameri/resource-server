@@ -1,7 +1,7 @@
 package com.jw.resourceserver.entity.resource;
 
 import com.jw.resourceserver.entity.BaseTimeEntity;
-import com.jw.resourceserver.entity.DatabaseConstants;
+import com.jw.resourceserver.entity.DBConstants;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,27 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = DatabaseConstants.Tables.COMMENTS)
+@Table(name = DBConstants.Tables.COMMENTS)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comments extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = DatabaseConstants.Columns.ID, nullable = false, columnDefinition =  DatabaseConstants.ColumnDefinitions.BIGINT)
+    @Column(name = DBConstants.Columns.ID, nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = DatabaseConstants.Columns.BOARD_ID, nullable = false)
+    @JoinColumn(name = DBConstants.Columns.BOARD_ID, nullable = false)
     @Setter
     private Boards boards;
 
-    @Column(name = DatabaseConstants.Columns.CONTENT, nullable = false, length = 1000)
+    @Column(name = DBConstants.Columns.CONTENT, nullable = false, columnDefinition = DBConstants.ColumnDefinitions.NVARCHAR_2000)
     private String content;
 
     // 대댓글 관계
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = DatabaseConstants.Columns.PARENT_ID)
+    @JoinColumn(name = DBConstants.Columns.PARENT_ID)
     @Setter
     private Comments parent;
 
@@ -37,7 +37,7 @@ public class Comments extends BaseTimeEntity {
     @OrderBy("created ASC")
     private List<Comments> replies = new ArrayList<>();
 
-    @Column(name = DatabaseConstants.Columns.IS_SECRET, nullable = false)
+    @Column(name = DBConstants.Columns.IS_SECRET, nullable = false)
     private Boolean isSecret = false;
 
     @Builder

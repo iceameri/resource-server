@@ -16,25 +16,25 @@ import java.time.LocalDateTime;
 public abstract class BaseTimeEntity {
 
     @CreatedDate
-    @Column(name = DatabaseConstants.Columns.CREATED, nullable = false, updatable = false)
+    @Column(name = DBConstants.Columns.CREATED, nullable = false, updatable = false)
     private LocalDateTime created;
 
     @CreatedBy
-    @Column(name = DatabaseConstants.Columns.CREATED_BY, updatable = false, length = 100)
+    @Column(name = DBConstants.Columns.CREATED_BY, updatable = false, length = 100)
     private String createdBy;
 
     @LastModifiedDate
-    @Column(name = DatabaseConstants.Columns.UPDATED, nullable = false)
+    @Column(name = DBConstants.Columns.UPDATED, nullable = false)
     private LocalDateTime updated;
 
     @LastModifiedBy
-    @Column(name = DatabaseConstants.Columns.UPDATED_BY, length = 100)
+    @Column(name = DBConstants.Columns.UPDATED_BY, length = 100)
     private String updatedBy;
 
-    @Column(name = DatabaseConstants.Columns.IS_DELETED, nullable = false)
+    @Column(name = DBConstants.Columns.IS_DELETED, nullable = false)
     private Boolean isDeleted = false;
 
-    @Column(name = DatabaseConstants.Columns.DELETED)
+    @Column(name = DBConstants.Columns.DELETED)
     private LocalDateTime deleted;
 
     // Soft Delete 메서드

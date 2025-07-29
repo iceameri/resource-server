@@ -6,12 +6,12 @@ public record CommentCreateRequest(
         Boolean isSecret
 ) {
     public CommentCreateRequest {
-        validateContent(content);
+        this.validateContent(content);
 
         isSecret = isSecret != null ? isSecret : false;
     }
 
-    private static void validateContent(String content) {
+    private void validateContent(String content) {
         if (content == null || content.trim().isEmpty()) {
             throw new IllegalArgumentException("댓글 내용은 필수입니다.");
         }
